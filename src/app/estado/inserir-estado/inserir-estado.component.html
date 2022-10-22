@@ -1,0 +1,45 @@
+<h1>Novo Estado</h1>
+
+<div class="well">
+    <form #formEstado="ngForm">
+        <div class="form-group">
+            <label for="nome">Nome do Estado:</label>
+            <input type="text" class="form-control" id="nome" name="nome" 
+            [(ngModel)]="estado.nome" 
+            #nome="ngModel" 
+            minlength="2" required>
+            <div *ngIf="nome.errors && (nome.dirty || nome.touched)"  class="alert alert-danger">
+                <div [hidden]="!nome.errors['required']">
+                     Digite o nome do Estado. 
+                </div>
+                <div [hidden]="!nome.errors['minlength']"> 
+                    O Nome deve conter ao menos 2 caracteres. 
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="sigla">Sigla do Estado:</label>
+            <input type="text" class="form-control" id="sigla" name="sigla" style="text-transform: uppercase"
+            [(ngModel)]="estado.sigla"
+            #sigla="ngModel"
+            mask="SS"
+            required>
+            <div *ngIf="sigla.errors && (sigla.dirty || sigla.touched)" class="alert alert-danger">
+                <div [hidden]="!sigla.errors['required']">
+                     Digite a sigla do Estado. 
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary"
+            (click)="insert()"
+            [disabled]="!formEstado.form.valid">
+                <i class="fa fa-save" aria-hidden="true"></i> Salvar
+            </button>
+            <a class="btn btn-secondary"
+            [routerLink]="['/estados']">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Voltar
+            </a>
+        </div>
+    </form>
+</div>
